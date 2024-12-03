@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+dramatiq[redis]
+boto3
+torchvision
+torch
+redis
+pytest
