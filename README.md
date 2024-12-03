@@ -17,4 +17,4 @@
 1. Клонировать репозиторий:
 
    ```bash
-   git clone https://github.com/Tiranomage/image-classification-app.git
+   git clone https://github.com/Tiranomage/image_classifier.git
