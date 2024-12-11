@@ -9,9 +9,26 @@
     <div class="container">
         <h1>Загрузить изображение</h1>
         <form action="/upload/" enctype="multipart/form-data" method="post">
-            <input name="file" type="file" required>
+            <input name="file" type="file" id="file-input" required>
+            <img id="image-preview" src="#" alt="Предварительный просмотр изображения" style="display:none; max-width:400px;">
             <input type="submit" value="Загрузить">
         </form>
     </div>
+    <script>
+        document.getElementById('file-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('image-preview').src = e.target.result;
+                    document.getElementById('image-preview').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                document.getElementById('image-preview').src = '#';
+                document.getElementById('image-preview').style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
