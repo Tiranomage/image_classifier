@@ -1,20 +1,20 @@
-# Image Classification Web App
+# Классификатор изображений
 
-## Description
+## Описание
 
-A web application that allows users to upload images, store them in an S3 bucket, and classify the images to identify the animal using a pre-trained machine learning model. The classification is performed asynchronously using dramatiq with Redis as the message broker.
+Веб-приложение, которое позволяет пользователям загружать изображения, сохранять их  и классифицировать изображения для идентификации животного с помощью предварительно подготовленной модели машинного обучения. Классификация выполняется асинхронно с использованием dramatiq и Redis в качестве посредника сообщений.
 
-## Tech Stack
+## Стек технологий
 
-- FastAPI for the web framework
-- Dramatiq for background tasks
-- Redis as the message broker
-- AWS S3 for storage
-- PyTorch and torchvision for image classification
+- FastAPI для веб-платформы
+- Dramatiq для фоновых задач
+- Redis в качестве посредника обмена сообщениями
+- SQlite3 для хранения данных
+- PyTorch и torchvision для классификации изображений
 
-## Setup
+## Загрузка
 
-1. Clone the repository:
+1. Клонировать репозиторий:
 
    ```bash
-   git clone https://github.com/yourusername/image-classification-app.git
+   git clone https://github.com/Tiranomage/image_classifier.git
