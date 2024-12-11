@@ -2,15 +2,16 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Upload Image</title>
+    <title>Загрузить изображение</title>
     <link rel="stylesheet" type="text/css" href="static/styles.css">
 </head>
 <body>
-    <h1>Upload Image</h1>
-    <form action="/upload/" enctype="multipart/form-data" method="post">
-        <input name="file" type="file" required>
-        <input type="submit" value="Upload">
-    </form>
-    <p>After uploading, check your task ID to get results.</p>
+    <div class="container">
+        <h1>Загрузить изображение</h1>
+        <form action="/upload/" enctype="multipart/form-data" method="post">
+            <input name="file" type="file" required>
+            <input type="submit" value="Загрузить">
+        </form>
+    </div>
 </body>
 </html>
