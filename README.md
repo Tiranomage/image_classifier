@@ -20,7 +20,7 @@
 
    ```bash
    git clone https://github.com/Tiranomage/image_classifier.git
-   cd your-repo
+   cd image_classifier
 
 2. Создание и активация virtualvenv:
 
