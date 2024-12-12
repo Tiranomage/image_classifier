@@ -49,7 +49,7 @@ preprocess = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 
-with open('imagenet_classes.txt', 'r', encoding='utf-8') as f:
+with open('app/imagenet_classes.txt', 'r', encoding='utf-8') as f:
     classes = [line.strip() for line in f.readlines()]
 
 @actor
@@ -111,7 +111,7 @@ async def upload_image(request: Request, file: UploadFile = File(...)):
     image.save(image_io, format='JPEG')
     image_base64 = base64.b64encode(image_io.getvalue()).decode('utf-8')
 
-    with open("result.html", "r", encoding="utf-8") as f:
+    with open("app/result.html", "r", encoding="utf-8") as f:
         html_content = f.read()
 
     base_url = request.base_url
@@ -128,8 +128,8 @@ async def upload_image(request: Request, file: UploadFile = File(...)):
 
 @app.get("/")
 async def root():
-    with open("index.html", "r", encoding="utf-8") as f:
+    with open("app/index.html", "r", encoding="utf-8") as f:
         html_content = f.read()
     return HTMLResponse(content=html_content)
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")

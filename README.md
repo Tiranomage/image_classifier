@@ -41,9 +41,15 @@
 5. Запуск FastAPi:
 
    ```bash
-   cd app
-   uvicorn main:app --reload
+   python -m uvicorn main:app --reload
 
 6. Перейти на страницу с приложением:
 
    Открыть браузер и перейти по адресу http://127.0.0.1:8000/ для доступа к веб-интерфейсу.
+
+## Запуск тестов
+
+1. Запустить тесты в консоли
+
+   ```bash
+   python -m pytest tests/test_main.py
