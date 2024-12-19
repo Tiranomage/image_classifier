@@ -41,7 +41,7 @@
 5. Запуск FastAPi:
 
    ```bash
-   python -m uvicorn main:app --reload
+   python -m uvicorn app.main:app --reload
 
 6. Перейти на страницу с приложением:
 
