@@ -1,10 +1,10 @@
-from fastapi import FastAPI, File, UploadFile, Request
+from fastapi import FastAPI, File, UploadFile, Request, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from dramatiq import actor, set_broker
 import torch
 from torchvision import models, transforms
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 import sqlite3
 import io
 import base64
@@ -80,9 +80,16 @@ def classify_image(task_id: str):
     conn.commit()
     conn.close()
 
+    return image, predicted_class, confidence
+
 @app.post("/upload/")
 async def upload_image(request: Request, file: UploadFile = File(...)):
     image_bytes = await file.read()
+    try:
+        image = Image.open(io.BytesIO(image_bytes))
+    except UnidentifiedImageError:
+        raise HTTPException(status_code=400, detail="Загруженный файл не является допустимым изображением.")
+    
     task_id = str(uuid.uuid4())
 
     conn = sqlite3.connect(DB_NAME)
@@ -94,18 +101,7 @@ async def upload_image(request: Request, file: UploadFile = File(...)):
     conn.commit()
     conn.close()
 
-    classify_image(task_id)
-
-    image = Image.open(io.BytesIO(image_bytes))
-    input_tensor = preprocess(image)
-    input_batch = input_tensor.unsqueeze(0)
-
-    with torch.no_grad():
-        output = model(input_batch)
-    probabilities = torch.nn.functional.softmax(output[0], dim=0)
-    top_prob, top_class = probabilities.topk(1)
-    predicted_class = classes[top_class.item()]
-    confidence = top_prob.item()
+    image, predicted_class, confidence = classify_image(task_id)
 
     image_io = io.BytesIO()
     image.save(image_io, format='JPEG')
